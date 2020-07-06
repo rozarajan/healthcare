@@ -22,3 +22,8 @@ data class Qualification(val id:String,val doctorId:String,val qualificationName
 data class HospitalAffiliation(val id:String,val doctorId:String,var hospitalDetails: HospitalDetails, val startDate:LocalDate,val endDate:LocalDate)
 
 @Document data class HospitalDetails(@Id val id:String, var hospitalName:String, val city:String, val country:String)
+
+data class Response (var code: Int = 0){
+    var message : String = ""
+
+}

@@ -37,11 +37,3 @@ rule "CountryValidation"
 	    responseResult.setCode(1003);
         responseResult.setMessage("Country is not valid");
 end
-
-rule "Id_Validation"
-	when
-		hospital: HospitalDetails((Integer.parseInt(id) > 1000))
-	then
-	    responseResult.setCode(1003);
-        responseResult.setMessage("Country is not valid");
-end

@@ -13,13 +13,14 @@ import java.io.File
 @ComponentScan("com.perfm.finddoctorapp")
 class DroolsConfiguration {
 
-    val hospitalValidationDrlFile = "HospitalValidation.drl"
-    val doctorValidationDrlFile = "DoctorValidation.drl"
+//    val hospitalValidationDrlFile = "HospitalValidation.drl"
+//    val doctorValidationDrlFile = "DoctorValidation.drl"
+
     @Bean
     fun kieContainer(): KieContainer? {
         val kieServices = KieServices.Factory.get()
         val kieFileSystem = kieServices.newKieFileSystem()
-        val dir = File("src/main/resources/rules")
+        val dir = File("src/main/resources")
         val directoryListing: Array<File> = dir.listFiles()
         if (directoryListing != null) {
             for(child in directoryListing)

@@ -1,0 +1,39 @@
+import com.perfm.finddoctorapp.model.HospitalDetails
+import com.perfm.finddoctorapp.model.Response
+
+global com.perfm.finddoctorapp.model.Response responseResult
+
+dialect  "mvel"
+
+rule "HospitalDetailsValidation"
+    when
+      hospital:  HospitalDetails(id.isEmpty() || hospitalName.isEmpty() || city.isEmpty() || country.isEmpty()
+                        ||id == null || hospitalName == null || city == null || country == null)
+    then
+        responseResult.setCode(1000);
+        responseResult.setMessage("Id, HospitalName, city, country are required values");
+end
+
+rule "HospitalNameValidation"
+	when
+		hospital: HospitalDetails(hospitalName != null, hospitalName not matches "(\\b[A-Z]{1}[a-z]+)( )([A-Z]{1}[a-z]+\\b)")
+	then
+	    responseResult.setCode(1001);
+        responseResult.setMessage("Hospital Name is not valid");
+end
+
+rule "CityValidation"
+	when
+		hospital: HospitalDetails(city != null && city not matches "(\\b[A-Z]{1}[a-z]+)( )([A-Z]{1}[a-z]+\\b)")
+	then
+	    responseResult.setCode(1002);
+        responseResult.setMessage("City is not valid");
+end
+
+rule "CountryValidation"
+	when
+		hospital: HospitalDetails(country != null && country not matches "(\\b[A-Z]{1}[a-z]+)( )([A-Z]{1}[a-z]+\\b)")
+	then
+	    responseResult.setCode(1003);
+        responseResult.setMessage("Country is not valid");
+end
